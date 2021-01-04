@@ -1,13 +1,14 @@
 import type { GetStaticPropsContext } from 'next'
+
+import { Layout } from '@components/common'
+import { Button, Text } from '@components/ui'
+import { Bag, Cross, Check } from '@components/icons'
+import { CartItem } from '@components/cart'
+
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import usePrice from '@bigcommerce/storefront-data-hooks/use-price'
-import { Layout } from '@components/common'
-import { Button } from '@components/ui'
-import { Bag, Cross, Check } from '@components/icons'
-import { CartItem } from '@components/cart'
-import { Text } from '@components/ui'
 
 export async function getStaticProps({
   preview,

@@ -1,16 +1,12 @@
-import cn from 'classnames'
+import { useState } from 'react'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
-import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
-import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
-import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
-import useSearch from '@bigcommerce/storefront-data-hooks/products/use-search'
+import cn from 'classnames'
+
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
 import { Container, Grid, Skeleton } from '@components/ui'
-
 import rangeMap from '@lib/range-map'
 import getSlug from '@lib/get-slug'
 import {
@@ -19,6 +15,11 @@ import {
   getDesignerPath,
   useSearchMeta,
 } from '@lib/search'
+
+import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
+import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
+import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
+import useSearch from '@bigcommerce/storefront-data-hooks/products/use-search'
 
 export async function getStaticProps({
   preview,

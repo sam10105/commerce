@@ -1,13 +1,7 @@
-import cn from 'classnames'
-import { FC, useState, useMemo, useRef, useEffect } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { getRandomPairOfColors } from '@lib/colors'
 
-interface Props {
-  className?: string
-  children?: any
-}
-
-const Avatar: FC<Props> = ({}) => {
+const Avatar = () => {
   const [bg] = useState(useMemo(() => getRandomPairOfColors, []))
   let ref = useRef() as React.MutableRefObject<HTMLInputElement>
 

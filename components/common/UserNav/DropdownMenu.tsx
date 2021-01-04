@@ -1,13 +1,15 @@
+import { FC, useRef, useState, useEffect } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
-import { FC, useRef, useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'
-import s from './DropdownMenu.module.css'
+
 import { Avatar } from '@components/common'
 import { Moon, Sun } from '@components/icons'
 import { useUI } from '@components/ui/context'
 import ClickOutside from '@lib/click-outside'
+
+import s from './DropdownMenu.module.css'
 
 import {
   disableBodyScroll,

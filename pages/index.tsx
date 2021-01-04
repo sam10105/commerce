@@ -1,9 +1,9 @@
-import rangeMap from '@lib/range-map'
-import { Layout } from '@components/common'
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+
+import { Layout, HomeAllProductsGrid } from '@components/common'
 import { ProductCard } from '@components/product'
 import { Grid, Marquee, Hero } from '@components/ui'
-import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import rangeMap from '@lib/range-map'
 
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllProducts from '@bigcommerce/storefront-data-hooks/api/operations/get-all-products'

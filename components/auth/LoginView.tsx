@@ -1,13 +1,12 @@
-import { FC, useEffect, useState, useCallback } from 'react'
-import { Logo, Button, Input } from '@components/ui'
-import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
-import { useUI } from '@components/ui/context'
+import { useEffect, useState, useCallback, FormEvent } from 'react'
 import { validate } from 'email-validator'
 
-interface Props {}
+import { Logo, Button, Input } from '@components/ui'
+import { useUI } from '@components/ui/context'
 
-const LoginView: FC<Props> = () => {
-  // Form State
+import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
+
+const LoginView = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -18,7 +17,7 @@ const LoginView: FC<Props> = () => {
 
   const login = useLogin()
 
-  const handleLogin = async (e: React.SyntheticEvent<EventTarget>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!dirty && !disabled) {

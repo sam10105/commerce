@@ -3,14 +3,16 @@ import type {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from 'next'
-import getSlug from '@lib/get-slug'
-import { missingLocaleInPages } from '@lib/usage-warns'
+
 import { Layout } from '@components/common'
 import { Text } from '@components/ui'
+import getSlug from '@lib/get-slug'
+import { missingLocaleInPages } from '@lib/usage-warns'
+import { defatultPageProps } from '@lib/defaults'
+
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getPage from '@bigcommerce/storefront-data-hooks/api/operations/get-page'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
-import { defatultPageProps } from '@lib/defaults'
 
 export async function getStaticProps({
   preview,

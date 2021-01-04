@@ -1,11 +1,10 @@
-import '@assets/main.css'
-import 'keen-slider/keen-slider.min.css'
-
 import { FC } from 'react'
 import type { AppProps } from 'next/app'
 
+import '@assets/main.css'
 import { ManagedUIContext } from '@components/ui/context'
 import { Head } from '@components/common'
+import 'keen-slider/keen-slider.min.css'
 
 const Noop: FC = ({ children }) => <>{children}</>
 

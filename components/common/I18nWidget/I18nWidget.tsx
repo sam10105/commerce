@@ -1,10 +1,11 @@
-import cn from 'classnames'
-import Link from 'next/link'
 import { FC, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import s from './I18nWidget.module.css'
+import cn from 'classnames'
+
 import { Cross, ChevronUp } from '@components/icons'
 import ClickOutside from '@lib/click-outside'
+import s from './I18nWidget.module.css'
 interface LOCALE_DATA {
   name: string
   img: {
@@ -30,7 +31,7 @@ const LOCALES_MAP: Record<string, LOCALE_DATA> = {
   },
 }
 
-const I18nWidget: FC = () => {
+const I18nWidget = () => {
   const [display, setDisplay] = useState(false)
   const {
     locale,
@@ -43,7 +44,7 @@ const I18nWidget: FC = () => {
   const currentLocale = locale || defaultLocale
 
   return (
-    <ClickOutside active={display} onClick={() => setDisplay(false)} >
+    <ClickOutside active={display} onClick={() => setDisplay(false)}>
       <nav className={s.root}>
         <div
           className="flex items-center relative"

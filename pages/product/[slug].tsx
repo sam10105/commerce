@@ -4,10 +4,9 @@ import type {
   InferGetStaticPropsType,
 } from 'next'
 import { useRouter } from 'next/router'
+
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
-
-// Data
 
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'

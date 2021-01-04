@@ -1,12 +1,14 @@
-import { FC, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import s from './Navbar.module.css'
-import { Logo, Container } from '@components/ui'
-import { Searchbar, UserNav } from '@components/common'
 import cn from 'classnames'
 import throttle from 'lodash.throttle'
 
-const Navbar: FC = () => {
+import { Logo, Container } from '@components/ui'
+import { Searchbar, UserNav } from '@components/common'
+
+import s from './Navbar.module.css'
+
+const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
