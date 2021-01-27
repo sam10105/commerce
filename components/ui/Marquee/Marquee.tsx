@@ -1,8 +1,8 @@
-import cn from 'classnames'
-import s from './Marquee.module.css'
 import { FC, ReactNode, Component } from 'react'
 import Ticker from 'react-ticker'
 import { useInView } from 'react-intersection-observer'
+import cn from 'classnames'
+import s from './Marquee.module.css'
 
 interface Props {
   className?: string
@@ -30,11 +30,11 @@ const Maquee: FC<Props> = ({
 
   return (
     <div className={rootClassName} ref={ref}>
-      {inView ? (
+      {inView && (
         <Ticker offset={80}>
           {() => <div className={s.container}>{children}</div>}
         </Ticker>
-      ) : null}
+      )}
     </div>
   )
 }

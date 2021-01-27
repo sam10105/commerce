@@ -26,11 +26,10 @@ export async function getStaticProps({
   locale,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
-  const { pages } = await getAllPages({ config, preview })
   const { categories, brands } = await getSiteInfo({ config, preview })
 
   return {
-    props: { pages, categories, brands },
+    props: { categories, brands },
   }
 }
 

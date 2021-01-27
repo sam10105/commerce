@@ -1,23 +1,17 @@
 import React, { FC, useMemo } from 'react'
 import { ThemeProvider } from 'next-themes'
 
-export interface State {
-  displaySidebar: boolean
-  displayDropdown: boolean
-  displayModal: boolean
-  displayToast: boolean
-  modalView: string
-  toastText: string
-}
-
 const initialState = {
   displaySidebar: false,
   displayDropdown: false,
   displayModal: false,
-  modalView: 'LOGIN_VIEW',
   displayToast: false,
+  modalView: 'LOGIN_VIEW',
   toastText: '',
 }
+
+type MODAL_VIEWS = 'SIGNUP_VIEW' | 'LOGIN_VIEW' | 'FORGOT_VIEW'
+type ToastText = string
 
 type Action =
   | {
@@ -53,79 +47,77 @@ type Action =
       view: MODAL_VIEWS
     }
 
-type MODAL_VIEWS = 'SIGNUP_VIEW' | 'LOGIN_VIEW' | 'FORGOT_VIEW'
-type ToastText = string
-
-export const UIContext = React.createContext<State | any>(initialState)
+export const UIContext = React.createContext<typeof initialState | any>(
+  initialState
+)
 
 UIContext.displayName = 'UIContext'
 
-function uiReducer(state: State, action: Action) {
+const uiReducer = (state = initialState, action: Action) => {
   switch (action.type) {
-    case 'OPEN_SIDEBAR': {
+    case 'OPEN_SIDEBAR':
       return {
         ...state,
         displaySidebar: true,
       }
-    }
-    case 'CLOSE_SIDEBAR': {
+
+    case 'CLOSE_SIDEBAR':
       return {
         ...state,
         displaySidebar: false,
       }
-    }
-    case 'OPEN_DROPDOWN': {
+
+    case 'OPEN_DROPDOWN':
       return {
         ...state,
         displayDropdown: true,
       }
-    }
-    case 'CLOSE_DROPDOWN': {
+
+    case 'CLOSE_DROPDOWN':
       return {
         ...state,
         displayDropdown: false,
       }
-    }
-    case 'OPEN_MODAL': {
+
+    case 'OPEN_MODAL':
       return {
         ...state,
         displayModal: true,
       }
-    }
-    case 'CLOSE_MODAL': {
+
+    case 'CLOSE_MODAL':
       return {
         ...state,
         displayModal: false,
       }
-    }
-    case 'OPEN_TOAST': {
+
+    case 'OPEN_TOAST':
       return {
         ...state,
         displayToast: true,
       }
-    }
-    case 'CLOSE_TOAST': {
+
+    case 'CLOSE_TOAST':
       return {
         ...state,
         displayToast: false,
       }
-    }
-    case 'SET_MODAL_VIEW': {
+
+    case 'SET_MODAL_VIEW':
       return {
         ...state,
         modalView: action.view,
       }
-    }
-    case 'SET_TOAST_TEXT': {
+
+    case 'SET_TOAST_TEXT':
       return {
         ...state,
         toastText: action.text,
       }
-    }
   }
 }
 
-export const UIProvider: FC = (props) => {
+export const UIProvider: FC = ({ children }) => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState)
 
   const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' })
@@ -167,7 +159,11 @@ export const UIProvider: FC = (props) => {
     [state]
   )
 
-  return <UIContext.Provider value={value} {...props} />
+  return (
+    <UIContext.Provider value={value}>
+      <ThemeProvider>{children}</ThemeProvider>
+    </UIContext.Provider>
+  )
 }
 
 export const useUI = () => {
@@ -177,9 +173,3 @@ export const useUI = () => {
   }
   return context
 }
-
-export const ManagedUIContext: FC = ({ children }) => (
-  <UIProvider>
-    <ThemeProvider>{children}</ThemeProvider>
-  </UIProvider>
-)

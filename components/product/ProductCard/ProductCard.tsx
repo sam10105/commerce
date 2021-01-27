@@ -20,17 +20,18 @@ interface Props {
   imgSizes?: string
 }
 
-const ProductCard: FC<Props> = ({
-  className,
-  product: p,
-  variant,
-  imgWidth,
-  imgHeight,
-  imgPriority,
-  imgLoading,
-  imgSizes,
-  imgLayout = 'responsive',
-}) => {
+const ProductCard: FC<Props> = (props) => {
+  const {
+    className,
+    product: p,
+    variant,
+    imgWidth,
+    imgHeight,
+    imgPriority,
+    imgLoading,
+    imgSizes,
+    imgLayout = 'responsive',
+  } = props
   const src = p.images.edges?.[0]?.node?.urlOriginal!
   const { price } = usePrice({
     amount: p.prices?.price?.value,

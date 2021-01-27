@@ -2,7 +2,7 @@
  * The utils here are used to help developers use the example
  */
 
-export function missingLocaleInPages(): [string[], () => void] {
+export function missingLocaleInPages() {
   const invalidPaths: string[] = []
   const log = () => {
     if (invalidPaths.length) {
@@ -22,5 +22,5 @@ unchecking the "Navigation Menu" option in the settings of ${
     }
   }
 
-  return [invalidPaths, log]
+  return [invalidPaths, log] as const
 }

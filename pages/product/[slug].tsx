@@ -10,7 +10,6 @@ import { ProductView } from '@components/product'
 
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
-import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import getAllProductPaths from '@bigcommerce/storefront-data-hooks/api/operations/get-all-product-paths'
 
 export async function getStaticProps({
@@ -20,7 +19,6 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
 
-  const { pages } = await getAllPages({ config, preview })
   const { product } = await getProduct({
     variables: { slug: params!.slug },
     config,
@@ -32,7 +30,7 @@ export async function getStaticProps({
   }
 
   return {
-    props: { pages, product },
+    props: { product },
     revalidate: 200,
   }
 }

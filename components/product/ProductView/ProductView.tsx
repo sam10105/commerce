@@ -1,30 +1,28 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import cn from 'classnames'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 
-import s from './ProductView.module.css'
 import { useUI } from '@components/ui/context'
 import { Swatch, ProductSlider } from '@components/product'
 import { Button, Container, Text } from '@components/ui'
+import WishlistButton from '@components/wishlist/WishlistButton'
 
 import usePrice from '@bigcommerce/storefront-data-hooks/use-price'
 import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
+
 import {
   getCurrentVariant,
   getProductOptions,
   SelectedOptions,
 } from '../helpers'
-import WishlistButton from '@components/wishlist/WishlistButton'
-
+import s from './ProductView.module.css'
 interface Props {
-  className?: string
-  children?: any
   product: ProductNode
 }
 
-const ProductView: FC<Props> = ({ product }) => {
+const ProductView = ({ product }: Props) => {
   const addItem = useAddItem()
   const { price } = usePrice({
     amount: product.prices?.price?.value,
@@ -141,7 +139,6 @@ const ProductView: FC<Props> = ({ product }) => {
           </section>
           <div>
             <Button
-              aria-label="Add to Cart"
               type="button"
               className={s.button}
               onClick={addToCart}

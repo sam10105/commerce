@@ -2,7 +2,7 @@ import { FC } from 'react'
 import type { AppProps } from 'next/app'
 
 import '@assets/main.css'
-import { ManagedUIContext } from '@components/ui/context'
+import { UIProvider } from '@components/ui/context'
 import { Head } from '@components/common'
 import 'keen-slider/keen-slider.min.css'
 
@@ -14,11 +14,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head />
-      <ManagedUIContext>
+      <UIProvider>
         <Layout pageProps={pageProps}>
           <Component {...pageProps} />
         </Layout>
-      </ManagedUIContext>
+      </UIProvider>
     </>
   )
 }

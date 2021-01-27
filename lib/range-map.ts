@@ -1,7 +1,4 @@
-export default function rangeMap(n: number, fn: (i: number) => any) {
-  const arr = []
-  while (n > arr.length) {
-    arr.push(fn(arr.length))
-  }
-  return arr
-}
+const rangeMap = (n: number, fn: (index: number) => any) =>
+  [...Array(n).keys()].map(fn)
+
+export default rangeMap
