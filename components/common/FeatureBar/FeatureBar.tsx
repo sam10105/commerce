@@ -10,13 +10,9 @@ interface FeatureBarProps {
   action?: React.ReactNode
 }
 
-const FeatureBar: React.FC<FeatureBarProps> = ({
-  title,
-  description,
-  className,
-  action,
-  hide,
-}) => {
+const FeatureBar: React.FC<FeatureBarProps> = (props) => {
+  const { title, description, className, action, hide } = props
+
   const rootClassName = cn(
     s.root,
     {
@@ -26,6 +22,7 @@ const FeatureBar: React.FC<FeatureBarProps> = ({
     },
     className
   )
+
   return (
     <div className={rootClassName}>
       <span className="block md:inline">{title}</span>

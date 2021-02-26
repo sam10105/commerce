@@ -1,9 +1,7 @@
-const path = require('path');
-
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: [path.resolve(__dirname, './setupTests.ts')],
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
   },
@@ -12,4 +10,4 @@ module.exports = {
       tsconfig: 'tsconfig.jest.json',
     },
   },
-};
+}

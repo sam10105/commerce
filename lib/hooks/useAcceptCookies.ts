@@ -17,8 +17,5 @@ export const useAcceptCookies = () => {
     Cookies.set(COOKIE_NAME, 'accepted', { expires: 365 })
   }
 
-  return {
-    acceptedCookies,
-    onAcceptCookies: acceptCookies,
-  }
+  return [acceptedCookies, acceptCookies] as const
 }

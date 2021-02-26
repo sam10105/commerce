@@ -3,10 +3,10 @@ import { getRandomPairOfColors } from '@lib/colors'
 
 const Avatar = () => {
   const [bg] = useState(useMemo(() => getRandomPairOfColors, []))
-  let ref = useRef() as React.MutableRefObject<HTMLInputElement>
+  const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (ref && ref.current) {
+    if (ref.current) {
       ref.current.style.backgroundImage = `linear-gradient(140deg, ${bg[0]}, ${bg[1]} 100%)`
     }
   }, [bg])

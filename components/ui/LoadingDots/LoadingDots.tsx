@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './LoadingDots.module.css'
 
-const LoadingDots: React.FC = () => {
+const LoadingDots = () => {
   return (
     <span className={s.root}>
       <span />

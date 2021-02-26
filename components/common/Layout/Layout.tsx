@@ -21,6 +21,7 @@ const Loading = () => (
 
 const dynamicProps = {
   loading: () => <Loading />,
+  ssr: false,
 }
 
 const LoginView = dynamic(
@@ -54,7 +55,7 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
     closeModal,
     modalView,
   } = useUI()
-  const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
+  const [acceptedCookies, onAcceptCookies] = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
 
   return (

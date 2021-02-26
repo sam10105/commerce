@@ -49,7 +49,7 @@ export async function getStaticProps({
     // products, then fill them with products from the products list, this
     // is useful for new commerce sites that don't have a lot of products
     return {
-      featured: rangeMap(6, (i) => featuredProducts[i] ?? products.shift())
+      featured: rangeMap(6, (i) => featuredProducts[i] ?? products.pop())
         .filter(nonNullable)
         .sort((a, b) => a.node.prices.price.value - b.node.prices.price.value)
         .reverse(),
