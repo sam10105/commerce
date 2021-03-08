@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import type { AppProps } from 'next/app'
 
 import '@assets/main.css'

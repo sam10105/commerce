@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import Portal from '@reach/portal'
 import { Cross } from '@components/icons'
-import { useBodyScroll } from '@hooks'
+import { useBodyScroll, useOnClickOutside } from '@hooks'
 
 import s from './Modal.module.css'
 
@@ -13,13 +13,14 @@ interface Props {
 }
 
 const Modal: FC<Props> = ({ children, open = false, onClose }) => {
-  const ref = useBodyScroll(open)
+  const bodyScrollRef = useBodyScroll(open)
+  const clickRef = useOnClickOutside(onClose)
 
   return (
     <Portal>
       {open && (
-        <div className={s.root} ref={ref}>
-          <div className={s.modal}>
+        <div className={s.root} ref={bodyScrollRef}>
+          <div className={s.modal} ref={clickRef}>
             <div className="h-7 flex items-center justify-end w-full">
               <button
                 onClick={onClose}
