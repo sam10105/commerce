@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const COOKIE_NAME = 'accept_cookies'
 
-export const useAcceptCookies = () => {
+function useAcceptCookies() {
   const [acceptedCookies, setAcceptedCookies] = useState(true)
 
   useEffect(() => {
@@ -19,3 +19,5 @@ export const useAcceptCookies = () => {
 
   return [acceptedCookies, acceptCookies] as const
 }
+
+export default useAcceptCookies

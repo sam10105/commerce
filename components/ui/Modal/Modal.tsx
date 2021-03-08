@@ -1,44 +1,28 @@
-import { FC, useRef, useEffect } from 'react'
+import type { FC } from 'react'
 import Portal from '@reach/portal'
-import s from './Modal.module.css'
 import { Cross } from '@components/icons'
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from 'body-scroll-lock'
+import { useBodyScroll } from '@hooks'
+
+import s from './Modal.module.css'
 
 interface Props {
   className?: string
-  children?: any
-  open?: boolean
+  children: React.ReactNode
+  open: boolean
   onClose: () => void
 }
 
-const Modal: FC<Props> = ({ children, open, onClose }) => {
-  const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-
-  useEffect(() => {
-    if (ref.current) {
-      if (open) {
-        disableBodyScroll(ref.current)
-      } else {
-        enableBodyScroll(ref.current)
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks()
-    }
-  }, [open])
+const Modal: FC<Props> = ({ children, open = false, onClose }) => {
+  const ref = useBodyScroll(open)
 
   return (
     <Portal>
-      {open ? (
+      {open && (
         <div className={s.root} ref={ref}>
           <div className={s.modal}>
             <div className="h-7 flex items-center justify-end w-full">
               <button
-                onClick={() => onClose()}
+                onClick={onClose}
                 aria-label="Close panel"
                 className="hover:text-gray-500 transition ease-in-out duration-150 focus:outline-none"
               >
@@ -48,7 +32,7 @@ const Modal: FC<Props> = ({ children, open, onClose }) => {
             {children}
           </div>
         </div>
-      ) : null}
+      )}
     </Portal>
   )
 }

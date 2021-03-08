@@ -1,27 +1,17 @@
-import { FC, useRef, useState, useEffect } from 'react'
+import { useState } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/router'
+import useLogout from '@bigcommerce/storefront-data-hooks/use-logout'
 
 import { Avatar } from '@components/common'
 import { Moon, Sun } from '@components/icons'
 import { useUI } from '@components/ui/context'
 import ClickOutside from '@lib/click-outside'
+import { useBodyScroll } from '@hooks'
 
 import s from './DropdownMenu.module.css'
-
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from 'body-scroll-lock'
-
-import useLogout from '@bigcommerce/storefront-data-hooks/use-logout'
-
-interface DropdownMenuProps {
-  open?: boolean
-}
 
 const LINKS = [
   {
@@ -38,26 +28,13 @@ const LINKS = [
   },
 ]
 
-const DropdownMenu: FC<DropdownMenuProps> = ({ open = false }) => {
+const DropdownMenu = () => {
   const logout = useLogout()
   const { pathname } = useRouter()
   const { theme, setTheme } = useTheme()
   const [display, setDisplay] = useState(false)
   const { closeSidebarIfPresent } = useUI()
-  const ref = useRef() as React.MutableRefObject<HTMLUListElement>
-
-  useEffect(() => {
-    if (ref.current) {
-      if (display) {
-        disableBodyScroll(ref.current)
-      } else {
-        enableBodyScroll(ref.current)
-      }
-    }
-    return () => {
-      clearAllBodyScrollLocks()
-    }
-  }, [display])
+  const ref = useBodyScroll(display)
 
   return (
     <ClickOutside active={display} onClick={() => setDisplay(false)}>

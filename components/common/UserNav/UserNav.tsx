@@ -17,7 +17,7 @@ const countItem = (count: number, item: any) => count + item.quantity
 const countItems = (count: number, items: any[]) =>
   items.reduce(countItem, count)
 
-const UserNav: FC<Props> = ({ className, children, ...props }) => {
+const UserNav: FC<Props> = ({ className }) => {
   const { data } = useCart()
   const { data: customer } = useCustomer()
   const { toggleSidebar, closeSidebarIfPresent, openModal } = useUI()
@@ -45,7 +45,7 @@ const UserNav: FC<Props> = ({ className, children, ...props }) => {
               <button
                 className={s.avatarButton}
                 aria-label="Menu"
-                onClick={() => openModal()}
+                onClick={openModal}
               >
                 <Avatar />
               </button>

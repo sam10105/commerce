@@ -20,6 +20,7 @@ const Navbar = () => {
     }, 200)
 
     document.addEventListener('scroll', handleScroll)
+
     return () => {
       document.removeEventListener('scroll', handleScroll)
     }

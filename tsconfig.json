@@ -19,6 +19,7 @@
       "@assets/*": ["assets/*"],
       "@config/*": ["config/*"],
       "@components/*": ["components/*"],
+      "@hooks": ["hooks"],
       "@utils/*": ["utils/*"]
     }
   },

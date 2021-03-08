@@ -7,7 +7,7 @@ import { useUI } from '@components/ui/context'
 import { Navbar, Footer } from '@components/common'
 import { Sidebar, Button, Modal, LoadingDots } from '@components/ui'
 import { CartSidebarView } from '@components/cart'
-import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
+import { useAcceptCookies } from '@hooks'
 
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 import type { Page } from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
