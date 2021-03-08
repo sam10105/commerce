@@ -1,10 +1,11 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import cn from 'classnames'
 
 import { Cross, ChevronUp } from '@components/icons'
-import ClickOutside from '@lib/click-outside'
+import { useOnClickOutside } from '@hooks'
+
 import s from './I18nWidget.module.css'
 interface LOCALE_DATA {
   name: string
@@ -33,6 +34,7 @@ const LOCALES_MAP: Record<string, LOCALE_DATA> = {
 
 const I18nWidget = () => {
   const [display, setDisplay] = useState(false)
+  const ref = useOnClickOutside(() => setDisplay(false))
   const {
     locale,
     locales,
@@ -44,56 +46,51 @@ const I18nWidget = () => {
   const currentLocale = locale || defaultLocale
 
   return (
-    <ClickOutside active={display} onClick={() => setDisplay(false)}>
-      <nav className={s.root}>
-        <div
-          className="flex items-center relative"
-          onClick={() => setDisplay(!display)}
-        >
-          <button className={s.button} aria-label="Language selector">
-            <img
-              className="block mr-2 w-5"
-              src={`/${LOCALES_MAP[currentLocale].img.filename}`}
-              alt={LOCALES_MAP[currentLocale].img.alt}
-            />
-            {options && (
-              <span className="cursor-pointer">
-                <ChevronUp className={cn({ [s.icon]: display })} />
-              </span>
-            )}
-          </button>
-        </div>
-        <div className="absolute top-0 right-0">
-          {options?.length && display ? (
-            <div className={s.dropdownMenu}>
-              <div className="flex flex-row justify-end px-6">
-                <button
-                  onClick={() => setDisplay(false)}
-                  aria-label="Close panel"
-                  className={s.closeButton}
-                >
-                  <Cross className="h-6 w-6" />
-                </button>
-              </div>
-              <ul>
-                {options.map((locale) => (
-                  <li key={locale}>
-                    <Link href={currentPath} locale={locale}>
-                      <a
-                        className={cn(s.item)}
-                        onClick={() => setDisplay(false)}
-                      >
-                        {LOCALES_MAP[locale].name}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+    <nav ref={ref} className={s.root}>
+      <div
+        className="flex items-center relative"
+        onClick={() => setDisplay(!display)}
+      >
+        <button className={s.button} aria-label="Language selector">
+          <img
+            className="block mr-2 w-5"
+            src={`/${LOCALES_MAP[currentLocale].img.filename}`}
+            alt={LOCALES_MAP[currentLocale].img.alt}
+          />
+          {options && (
+            <span className="cursor-pointer">
+              <ChevronUp className={cn({ [s.icon]: display })} />
+            </span>
+          )}
+        </button>
+      </div>
+      <div className="absolute top-0 right-0">
+        {options?.length && display && (
+          <div className={s.dropdownMenu}>
+            <div className="flex flex-row justify-end px-6">
+              <button
+                onClick={() => setDisplay(false)}
+                aria-label="Close panel"
+                className={s.closeButton}
+              >
+                <Cross className="h-6 w-6" />
+              </button>
             </div>
-          ) : null}
-        </div>
-      </nav>
-    </ClickOutside>
+            <ul>
+              {options.map((locale) => (
+                <li key={locale}>
+                  <Link href={currentPath} locale={locale}>
+                    <a className={cn(s.item)} onClick={() => setDisplay(false)}>
+                      {LOCALES_MAP[locale].name}
+                    </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </nav>
   )
 }
 
